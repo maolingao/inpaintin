@@ -1,9 +1,9 @@
 % read the image and the mask from input files
-f = double(imread('corrupted.png'));
+f = double(imread('./data/corrupted.png'));
 [ny, nx, c] = size(f);
 N=nx*ny*c;
 % mask(i,j) = 1 iff pixel (i,j) is corrupted.
-mask = imread('mask.png') == zeros(ny, nx, c);
+mask = imread('./data/mask.png') == zeros(ny, nx, c);
 
 % vectorize image and mask
 f=f(:);
@@ -59,7 +59,7 @@ while( res_p > epsilon || res_d > epsilon )
 	if(i > ite_max) %#ok<ALIGN>
 		break;
     end    
-	if mod(i, 100) == 0 %#ok<ALIGN>
+	if mod(i, 20) == 0 %#ok<ALIGN>
 		fprintf('iteration %4i, primal residual = %8.2e, dual residual = %8.2e \n', i, res_p, res_d);
         u = X*(u_tilde) + Y*f;
         imshow([uint8(reshape(f, ny, nx, 3)) uint8(reshape(u, ny, nx, 3))]);
